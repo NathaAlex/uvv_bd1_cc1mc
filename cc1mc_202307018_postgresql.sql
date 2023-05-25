@@ -3,31 +3,32 @@
 --
 
 
+DROP USER IF EXISTS nathanalex;
+DROP DATABASE IF EXISTS uvv;
+
 
 CREATE USER nathanalex 
-SUPERUSER
-CREATEBD
+CREATEDB
 CREATEROLE
 LOGIN
 ENCRYPTED PASSWORD 'nathanalex';
 
-ALTER USER nathanalex;
+
 
 
 CREATE DATABASE uvv
-OWNER: nathanalex
-TEMPLATE: template0
-ENCODING: UTF8
-LC_COLLATE: pt_BR.UTF-8
-LC_CTYPE:pt_BR.UTF-8
-ALLOW_CONNECTIONS: true;
+OWNER = nathanalex
+TEMPLATE = template0
+ENCODING = 'UTF8'
+LC_COLLATE = 'pt_BR.UTF-8'
+LC_CTYPE = 'pt_BR.UTF-8'
+ALLOW_CONNECTIONS = true;
 
-\c uvv;
-
---\connect -reuse-previous=off uvv nathanalex
-
+\c "host=localhost dbname=uvv user=nathanalex password='nathanalex'";
 
 CREATE SCHEMA IF NOT EXISTS lojas AUTHORIZATION nathanalex;
+
+SET search_path TO lojas;
 
 -- Criando a tabela produtos
 CREATE TABLE produtos (
@@ -252,3 +253,4 @@ REFERENCES pedidos (pedido_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
+
