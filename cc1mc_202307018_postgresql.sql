@@ -2,20 +2,18 @@
 -- Turma: CC1MC
 --
 
-
-DROP USER IF EXISTS nathanalex;
+-- removendo usuario e base de dados caso ja exista.
 DROP DATABASE IF EXISTS uvv;
+DROP USER IF EXISTS nathanalex;
 
-
+-- Criando usuário
 CREATE USER nathanalex 
 CREATEDB
 CREATEROLE
 LOGIN
 ENCRYPTED PASSWORD 'nathanalex';
 
-
-
-
+-- Criando base de dados 
 CREATE DATABASE uvv
 OWNER = nathanalex
 TEMPLATE = template0
@@ -24,10 +22,13 @@ LC_COLLATE = 'pt_BR.UTF-8'
 LC_CTYPE = 'pt_BR.UTF-8'
 ALLOW_CONNECTIONS = true;
 
+--Conectando e mudando de usuário
 \c "host=localhost dbname=uvv user=nathanalex password='nathanalex'";
 
+-- CRIANDO SCHEMA E VERIFICANDO SE JA EXISTE ALGUM
 CREATE SCHEMA IF NOT EXISTS lojas AUTHORIZATION nathanalex;
 
+--setando pacote para lojas.
 SET search_path TO lojas;
 
 -- Criando a tabela produtos
@@ -175,8 +176,8 @@ CREATE TABLE pedidos_itens (
                 pedido_id NUMERIC(38) NOT NULL,
                 produto_id NUMERIC(38) NOT NULL,
                 numero_da_linha NUMERIC(38) NOT NULL,
-                preco_unitário NUMERIC(10,2) NOT NULL,
-                quatidade NUMERIC(38) NOT NULL,
+                preco_unitario NUMERIC(10,2) NOT NULL,
+                quantidade NUMERIC(38) NOT NULL,
                 CONSTRAINT pk_pedidos_itens PRIMARY KEY (pedido_id, produto_id)
 );
 
@@ -187,8 +188,8 @@ COMMENT ON TABLE pedidos_itens IS 'Tabela com os itens dos pedidos';
 COMMENT ON COLUMN pedidos_itens.pedido_id IS 'Chave primaria da tabela pedidos_itens';
 COMMENT ON COLUMN pedidos_itens.produto_id IS 'Chave primária da tabela produtos';
 COMMENT ON COLUMN pedidos_itens.numero_da_linha IS 'Campo que comporta o numero da linha';
-COMMENT ON COLUMN pedidos_itens.preco_unitário IS 'Campo que comporta o preço unitário do item';
-COMMENT ON COLUMN pedidos_itens.quatidade IS 'Campo que comporta a quantidade de cada item';
+COMMENT ON COLUMN pedidos_itens.preco_unitario IS 'Campo que comporta o preço unitário do item';
+COMMENT ON COLUMN pedidos_itens.quantidade IS 'Campo que comporta a quantidade de cada item';
 
 -- Inserindo chave estrangeira na tabela pedidos_itens, PK da tabela produtos
 ALTER TABLE pedidos_itens ADD CONSTRAINT produtos_pedidos_itens_fk
@@ -253,4 +254,44 @@ REFERENCES pedidos (pedido_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
+
+-- Criando check para o email da tabela clientes ser válido.
+ALTER TABLE clientes
+ADD CONSTRAINT check_clientes_email 
+CHECK (email like '%@%');
+
+-- Criando check para o status do pedido na tabela pedidos ser válido
+ALTER TABLE pedidos
+ADD CONSTRAINT check_pedidos_status
+CHECK (status IN ('CANCELADO', 'COMPLETO', 'ABERTO', 'PAGO', 'REEMBOLSADO', 'ENVIADO'));
+
+-- CRIANDO CHECK PARA O STATUS DO ENVIO NA TABELA ENVIO SER VÁLIDA
+ALTER TABLE envios
+ADD CONSTRAINT check_envio_status
+CHECK (status IN ('CRIADO', 'ENVIADO', 'TRANSITO', 'ENTREGUE'));
+
+-- CRIANDO CHECK PARA O PREÇO UNITÁRIO PARA VERIFICAR SE O VALOR DA UNIDADE NÃO É NEGATIVO; 
+ALTER TABLE pedidos_itens
+ADD CONSTRAINT check_pedidos_itens_preco_unitario
+CHECK (preco_unitario >= 0);
+
+-- CRIANDO CHECK PARA VERIFICAR SE A QUANTIDADE NÃO É NEGATIVO
+ALTER TABLE pedidos_itens
+ADD CONSTRAINT check_pedidos_itens_quantidade
+CHECK (quantidade >= 0);
+
+-- CRIANDO CHECK DO PREÇO UNITÁRIO PARA VERIFICAR SE O VALOR DA UNIDADE NÃO É NEGATIVO; 
+ALTER TABLE produtos
+ADD CONSTRAINT check_produtos_preco_unitario
+CHECK (preco_unitario >= 0);
+
+-- CRIANDO CHECK PARA VERIFICAR SE O INSERT INSERIU UM ENDEREÇO EM PELO MENOS NO DADO ENDEREÇO_WEB OU ENDEREÇO FISICO
+ALTER TABLE lojas
+ADD CONSTRAINT check_lojas_endereco
+CHECK ((endereco_web IS NOT NULL) OR (endereco_fisico IS NOT NULL));
+
+-- CRIANDO CHECK PARA VERIFICAR SE A QUANTIDADE NÃO É NEGATIVO
+ALTER TABLE estoques
+ADD CONSTRAINT check_estoques_quantidade
+CHECK (quantidade >= 0);
 
