@@ -46,15 +46,15 @@ Siga as etapas abaixo para utilizar o projeto PSet1:
 
 ### Modelo lógico - Arquivo PowerArchitect
 
-- Neste arquivo contém o modelo lógico utilizado para gerar o sql utilizado no script inicial, que pode ser aberto e modificado no software Power Achitect.
+- [Neste arquivo](https://github.com/NathaAlex/uvv_bd1_cc1mc/blob/main/pset1/cc1mc_202307018_postgresql.architect) contém o modelo lógico utilizado para gerar o sql utilizado no script inicial, que pode ser aberto e modificado no software Power Achitect.
 
 ### Modelo lógico - Arquivo PDF
 
-- Neste aquivo contém o modelo lógico, em PDF, utilizado durante todo o projeto.
+- [Neste aquivo](https://github.com/NathaAlex/uvv_bd1_cc1mc/blob/main/pset1/cc1mc_202307018_postgresql.pdf) contém o modelo lógico, em PDF, utilizado durante todo o projeto.
 
 ### Script - Arquivo SQL
 
-- Neste arquivo contém todo o código que irá criar um usuário, um schema, um banco de dados e todas as tabelas vistas no modelo logico com todo o conteúdo necessário, porém sem os inserts.
+- [Neste arquivo](https://github.com/NathaAlex/uvv_bd1_cc1mc/blob/main/pset1/cc1mc_202307018_postgresql.sql) contém todo o código que irá criar um usuário, um schema, um banco de dados e todas as tabelas vistas no modelo logico com todo o conteúdo necessário, porém sem os inserts.
 
 ## Contato
 
