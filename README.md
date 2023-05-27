@@ -3,7 +3,7 @@
 ## Visão Geral
 Este projeto, denominado PSet1, é uma tarefa de banco de dados que faz parte do currículo do curso e o objetivo principal é proporcionar uma oportunidade de aprendizado abrangente. O PSet1 aborda desde o controle de versões com Git e GitHub, passando pela formatação de documentos com Markdown, até o projeto lógico de bancos de dados com o PostgreSQL e a manipulação de dados com SQL. Ao finalizar o projeto, você terá adquirido habilidades valiosas em várias áreas-chave da tecnologia.
 
-O guia completo do projeto pode ser encontrado no [link para o guia do projeto][(https://github.com/NathaAlex/pset1/blob/main/pset1.pdf)]
+O guia completo do projeto pode ser encontrado no [link para o guia do projeto](https://github.com/NathaAlex/pset1/blob/main/pset1.pdf)
 
 ## Requisitos
 Para realizar este projeto, você precisará das seguintes ferramentas e conhecimentos:
