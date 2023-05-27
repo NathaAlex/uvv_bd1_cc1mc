@@ -60,5 +60,5 @@ Siga as etapas abaixo para utilizar o projeto PSet1:
 
 - Email: Nathanalex.asl@gmail.com
 - Telefone/Whatsapp/Telegram: (27) 99299-6394
-- GitHub: https://github.com/NathaAlex
-- Linkedin: https://www.linkedin.com/in/nathan-álex-da-silva-oliveira-703b5b1a1/
+- GitHub: [Nathan Álex](https://github.com/NathaAlex)
+- Linkedin: [Nathan Álex da Silva Oliveira](https://www.linkedin.com/in/nathan-álex-da-silva-oliveira-703b5b1a1/)
